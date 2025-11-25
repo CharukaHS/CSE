@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Live Portfolio — Public Track Record</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Live Portfolio — Public Track Record</h1>
+      <a href="admin.php" class="btn-ghost">Admin Login</a>
+    </header>
+
+    <main id="app">
+      <section class="overview card">
+        <div class="row">
+          <div>
+            <div class="label">Portfolio Value</div>
+            <div class="value" id="totalValue">—</div>
+          </div>
+          <div>
+            <div class="label">Daily Change</div>
+            <div class="value" id="dailyChange">—</div>
+          </div>
+          <div>
+            <div class="label">Since Start</div>
+            <div class="value" id="sinceStart">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Portfolio Growth Chart</h2>
+        <div class="small">Track your portfolio value over time</div>
+        <div class="chart-container">
+          <canvas id="publicPortfolioChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card holdings">
+        <h2>Holdings</h2>
+        <table id="holdingsTable">
+          <thead>
+            <tr><th>Symbol</th><th>Qty</th><th>Avg Price</th><th>Market Price</th><th>Value</th><th>Gain/Loss</th><th>Notes</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card logs">
+        <h2>Daily Log</h2>
+        <table id="logsTable">
+          <thead><tr><th>Date</th><th>Total Value</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+    </main>
+
+    <footer>
+      <p><small>Educational portfolio tracking tool. Updated daily by administrator.</small></p>
+    </footer>
+  </div>
+  <script src="assets/js/app_public.js"></script>
+</body>
+</html>

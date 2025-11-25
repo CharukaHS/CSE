@@ -1,0 +1,10 @@
+{
+  "holdings": [
+    {"symbol":"ABC","qty":100,"avgPrice":50.00,"marketPrice":55.00,"notes":"Demo"},
+    {"symbol":"XYZ","qty":200,"avgPrice":30.00,"marketPrice":28.00,"notes":"Demo loss"}
+  ],
+  "logs": [
+    {"date":"2025-11-20","value":15000},
+    {"date":"2025-11-21","value":15250}
+  ]
+}
