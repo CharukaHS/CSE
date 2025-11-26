@@ -11,6 +11,7 @@ if (file_exists($dataFile)) {
     $default = [
         'cashBalance' => 50000,
         'initialDeposit' => 0,
+        'showHoldingsPublic' => true,
         'holdings' => [
             [
                 'symbol' => 'ABC',

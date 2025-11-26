@@ -25,6 +25,11 @@ if (!isset($data['cashBalance'])) {
 if (!isset($data['initialDeposit'])) {
     $data['initialDeposit'] = 0;
 }
+
+// Ensure showHoldingsPublic field exists
+if (!isset($data['showHoldingsPublic'])) {
+    $data['showHoldingsPublic'] = true;
+}
 ?>
 <!doctype html>
 <html>
@@ -126,7 +131,21 @@ if (!isset($data['initialDeposit'])) {
             </div>
           </section>
 
-
+          <!-- Public Visibility Settings -->
+          <section class="card">
+            <h2>👁️ Public Visibility Settings</h2>
+            <div class="small mb-2">Control what information is visible on the public page</div>
+            <div style="display:flex;align-items:center;gap:16px;padding:16px;background:rgba(212, 165, 116, 0.05);border-radius:8px;border:1px solid rgba(212, 165, 116, 0.15)">
+              <label style="display:flex;align-items:center;gap:12px;cursor:pointer;flex:1">
+                <input type="checkbox" id="showHoldingsCheckbox" style="width:auto;cursor:pointer;transform:scale(1.3)" />
+                <span style="font-size:15px;font-weight:500">Show Holdings Table on Public Page</span>
+              </label>
+              <span id="holdingsVisibilityStatus" class="badge" style="padding:6px 16px"></span>
+            </div>
+            <div class="small" style="margin-top:12px;padding:12px;background:rgba(139, 143, 163, 0.08);border-radius:6px">
+              ℹ️ When disabled, the holdings table will be hidden from the public page, but all calculations (portfolio value, gains, etc.) will continue to work normally.
+            </div>
+          </section>
 
           <!-- Holdings Management -->
           <section class="card">

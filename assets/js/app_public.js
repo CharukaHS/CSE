@@ -1,4 +1,4 @@
-// Enhanced public portfolio script with sidebar stats
+// Enhanced public portfolio script with sidebar stats and holdings visibility control
 async function fetchData(){
   try{
     const res = await fetch('api/load.php');
@@ -127,6 +127,7 @@ function renderChart(logs){
 function render(data){
   const holdings = data.holdings || [];
   const logs = data.logs || [];
+  const showHoldings = data.showHoldingsPublic !== false; // Default to true if not set
   
   // Get cash balance and initial deposit from data
   const cashBalance = data.cashBalance || 0;
@@ -189,38 +190,49 @@ function render(data){
   sinceStartEl.textContent = (sinceStartPct >= 0 ? '+' : '') + sinceStartPct.toFixed(2) + '%';
   sinceStartEl.style.color = sinceStartPct >= 0 ? '#2ecc71' : '#e74c3c';
 
-  // Holdings table
-  const tbody = document.querySelector('#holdingsTable tbody');
-  tbody.innerHTML = '';
-  
-  if(holdings.length === 0){
-    const tr = document.createElement('tr');
-    tr.innerHTML = '<td colspan="7" style="text-align:center;color:var(--muted);padding:32px">No holdings to display</td>';
-    tbody.appendChild(tr);
-  } else {
-    holdings.forEach(h => {
-      const marketPrice = Number(h.marketPrice)||0;
-      const qty = Number(h.qty)||0;
-      const avgPrice = Number(h.avgPrice)||0;
-      const value = marketPrice * qty;
-      const gainLoss = (marketPrice - avgPrice) * qty;
-      const gainLossPct = avgPrice ? ((marketPrice - avgPrice)/avgPrice*100) : 0;
+  // Holdings section - show/hide based on admin setting
+  const holdingsSection = document.querySelector('.card.holdings');
+  if (holdingsSection) {
+    if (showHoldings) {
+      holdingsSection.style.display = 'block';
       
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><strong>${h.symbol}</strong></td>
-        <td>${qty}</td>
-        <td>LKR ${formatLKR(avgPrice)}</td>
-        <td>LKR ${formatLKR(marketPrice)}</td>
-        <td><strong>LKR ${formatLKR(value)}</strong></td>
-        <td style="color:${gainLoss >= 0 ? '#2ecc71' : '#e74c3c'}">
-          ${gainLoss >= 0 ? '+' : ''}${formatLKR(gainLoss)} 
-          <span class="badge ${gainLoss >= 0 ? 'badge-success' : 'badge-danger'}">${gainLossPct.toFixed(2)}%</span>
-        </td>
-        <td>${h.notes || '—'}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+      // Holdings table
+      const tbody = document.querySelector('#holdingsTable tbody');
+      tbody.innerHTML = '';
+      
+      if(holdings.length === 0){
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="7" style="text-align:center;color:var(--muted);padding:32px">No holdings to display</td>';
+        tbody.appendChild(tr);
+      } else {
+        holdings.forEach(h => {
+          const marketPrice = Number(h.marketPrice)||0;
+          const qty = Number(h.qty)||0;
+          const avgPrice = Number(h.avgPrice)||0;
+          const value = marketPrice * qty;
+          const gainLoss = (marketPrice - avgPrice) * qty;
+          const gainLossPct = avgPrice ? ((marketPrice - avgPrice)/avgPrice*100) : 0;
+          
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${h.symbol}</strong></td>
+            <td>${qty}</td>
+            <td>LKR ${formatLKR(avgPrice)}</td>
+            <td>LKR ${formatLKR(marketPrice)}</td>
+            <td><strong>LKR ${formatLKR(value)}</strong></td>
+            <td style="color:${gainLoss >= 0 ? '#2ecc71' : '#e74c3c'}">
+              ${gainLoss >= 0 ? '+' : ''}${formatLKR(gainLoss)} 
+              <span class="badge ${gainLoss >= 0 ? 'badge-success' : 'badge-danger'}">${gainLossPct.toFixed(2)}%</span>
+            </td>
+            <td>${h.notes || '—'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    } else {
+      // Hide the holdings section
+      holdingsSection.style.display = 'none';
+    }
   }
 
   // Logs table with change calculation

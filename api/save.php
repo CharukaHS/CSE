@@ -23,6 +23,7 @@ if (!isset($input['holdings'])) $input['holdings'] = [];
 if (!isset($input['logs'])) $input['logs'] = [];
 if (!isset($input['cashBalance'])) $input['cashBalance'] = 0;
 if (!isset($input['initialDeposit'])) $input['initialDeposit'] = 0;
+if (!isset($input['showHoldingsPublic'])) $input['showHoldingsPublic'] = true;
 
 // Save to file
 $json = json_encode($input, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

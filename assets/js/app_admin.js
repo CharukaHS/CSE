@@ -1,4 +1,4 @@
-/* Enhanced Admin Panel Script with Initial Deposit and Cash Balance Management */
+/* Enhanced Admin Panel Script with Initial Deposit, Cash Balance, and Holdings Visibility Management */
 (function () {
   'use strict';
 
@@ -12,6 +12,8 @@
   const updateInitialDepositBtn = document.getElementById('updateInitialDepositBtn');
   const cashBalanceInput = document.getElementById('cashBalanceInput');
   const updateCashBtn = document.getElementById('updateCashBtn');
+  const showHoldingsCheckbox = document.getElementById('showHoldingsCheckbox');
+  const holdingsVisibilityStatus = document.getElementById('holdingsVisibilityStatus');
 
   if (!appRoot || !logsRoot) {
     console.warn('Admin UI root elements not found.');
@@ -20,7 +22,7 @@
 
   let state = window.initialData && typeof window.initialData === 'object'
     ? JSON.parse(JSON.stringify(window.initialData))
-    : { holdings: [], logs: [], cashBalance: 0, initialDeposit: 0 };
+    : { holdings: [], logs: [], cashBalance: 0, initialDeposit: 0, showHoldingsPublic: true };
 
   // Ensure fields exist
   if (typeof state.cashBalance === 'undefined') {
@@ -28,6 +30,9 @@
   }
   if (typeof state.initialDeposit === 'undefined') {
     state.initialDeposit = 0;
+  }
+  if (typeof state.showHoldingsPublic === 'undefined') {
+    state.showHoldingsPublic = true;
   }
 
   let editingIndex = -1;
@@ -64,6 +69,18 @@
     URL.revokeObjectURL(url);
   }
 
+  function updateVisibilityStatus() {
+    if (!holdingsVisibilityStatus) return;
+    
+    if (state.showHoldingsPublic) {
+      holdingsVisibilityStatus.textContent = 'VISIBLE';
+      holdingsVisibilityStatus.className = 'badge badge-success';
+    } else {
+      holdingsVisibilityStatus.textContent = 'HIDDEN';
+      holdingsVisibilityStatus.className = 'badge badge-danger';
+    }
+  }
+
   async function saveToServer() {
     if (!btnSave) return;
     try {
@@ -96,9 +113,12 @@
       const res = await fetch('api/load.php');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      state = data && typeof data === 'object' ? data : { holdings: [], logs: [], cashBalance: 0 };
+      state = data && typeof data === 'object' ? data : { holdings: [], logs: [], cashBalance: 0, showHoldingsPublic: true };
       if (typeof state.cashBalance === 'undefined') {
         state.cashBalance = 0;
+      }
+      if (typeof state.showHoldingsPublic === 'undefined') {
+        state.showHoldingsPublic = true;
       }
       editingIndex = -1;
       render();
@@ -146,20 +166,6 @@
     
     document.getElementById('adminSummaryCategory').textContent = 'Wealth / Assets / Equity';
 
-    // Update display section
-    document.getElementById('adminDisplayInitialDeposit').textContent = 'LKR ' + formatLKR(initialDeposit);
-    document.getElementById('adminDisplayCurrentPortfolio').textContent = 'LKR ' + formatLKR(portfolioValue);
-    document.getElementById('adminDisplayCashBalance').textContent = 'LKR ' + formatLKR(cashBalance);
-    document.getElementById('adminDisplayTotalValue').textContent = 'LKR ' + formatLKR(totalWealth);
-    
-    const displayGainEl = document.getElementById('adminDisplayTotalGain');
-    displayGainEl.textContent = (totalGain >= 0 ? '+' : '') + formatLKR(totalGain) + ' LKR';
-    displayGainEl.style.color = totalGain >= 0 ? '#2ecc71' : '#e74c3c';
-    
-    const displayReturnEl = document.getElementById('adminDisplayReturnPct');
-    displayReturnEl.textContent = (returnPct >= 0 ? '+' : '') + returnPct.toFixed(2) + '%';
-    displayReturnEl.style.color = returnPct >= 0 ? '#2ecc71' : '#e74c3c';
-
     // Update input fields
     if (initialDepositInput) {
       initialDepositInput.value = state.initialDeposit || 0;
@@ -167,6 +173,12 @@
     if (cashBalanceInput) {
       cashBalanceInput.value = cashBalance;
     }
+    
+    // Update visibility checkbox
+    if (showHoldingsCheckbox) {
+      showHoldingsCheckbox.checked = state.showHoldingsPublic;
+    }
+    updateVisibilityStatus();
   }
 
   function renderChart() {
@@ -526,6 +538,19 @@
       state.cashBalance = newBalance;
       showMessage('Cash balance updated to LKR ' + formatLKR(newBalance));
       updateSidebarStats();
+    });
+  }
+
+  // Holdings visibility toggle handler
+  if (showHoldingsCheckbox) {
+    showHoldingsCheckbox.addEventListener('change', (e) => {
+      state.showHoldingsPublic = e.target.checked;
+      updateVisibilityStatus();
+      showMessage(
+        state.showHoldingsPublic 
+          ? 'Holdings table is now VISIBLE on public page' 
+          : 'Holdings table is now HIDDEN on public page'
+      );
     });
   }
 
