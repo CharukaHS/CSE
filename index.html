@@ -8,61 +8,138 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Live Portfolio — Public Track Record</h1>
-      <a href="admin.php" class="btn-ghost">Admin Login</a>
-    </header>
+  <div class="layout-wrapper">
+    <!-- Sidebar with Account Summary -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">Portfolio Tracker</div>
+        <div class="sidebar-subtitle">Live Investment Dashboard</div>
+      </div>
 
-    <main id="app">
-      <section class="overview card">
-        <div class="row">
-          <div>
-            <div class="label">Portfolio Value</div>
-            <div class="value" id="totalValue">—</div>
-          </div>
-          <div>
-            <div class="label">Daily Change</div>
-            <div class="value" id="dailyChange">—</div>
-          </div>
-          <div>
-            <div class="label">Since Start</div>
-            <div class="value" id="sinceStart">—</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>Portfolio Growth Chart</h2>
-        <div class="small">Track your portfolio value over time</div>
-        <div class="chart-container">
-          <canvas id="publicPortfolioChart"></canvas>
-        </div>
-      </section>
-
-      <section class="card holdings">
-        <h2>Holdings</h2>
-        <table id="holdingsTable">
-          <thead>
-            <tr><th>Symbol</th><th>Qty</th><th>Avg Price</th><th>Market Price</th><th>Value</th><th>Gain/Loss</th><th>Notes</th></tr>
-          </thead>
-          <tbody></tbody>
+      <!-- Account Summary Table in Sidebar -->
+      <div class="sidebar-summary">
+        <div class="summary-label">Account Summary</div>
+        <table class="sidebar-table">
+          <tbody>
+            <tr>
+              <td class="label">Initial Deposit</td>
+              <td class="value" id="summaryInitialDeposit">—</td>
+            </tr>
+            <tr>
+              <td class="label">Current Portfolio</td>
+              <td class="value" id="summaryCurrentPortfolio">—</td>
+            </tr>
+            <tr>
+              <td class="label">Cash Balance</td>
+              <td class="value" id="summaryCashBalance">—</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="label">Total Value</td>
+              <td class="value" id="summaryTotalValue">—</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="label">Total Gain</td>
+              <td class="value" id="summaryTotalGain">—</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="label">Return %</td>
+              <td class="value" id="summaryReturnPct">—</td>
+            </tr>
+            <tr>
+              <td class="label">Category</td>
+              <td class="value" id="summaryCategory">—</td>
+            </tr>
+          </tbody>
         </table>
-      </section>
+      </div>
+    </aside>
 
-      <section class="card logs">
-        <h2>Daily Log</h2>
-        <table id="logsTable">
-          <thead><tr><th>Date</th><th>Total Value</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </section>
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="container">
+        <header>
+          <div>
+            <h1>Live Portfolio Dashboard</h1>
+            <p class="lead">Real-time investment tracking and performance metrics</p>
+          </div>
+        </header>
 
-    </main>
+        <main id="app">
+          <!-- Overview Cards -->
+          <section class="overview card">
+            <h2>Performance Overview</h2>
+            <div class="overview-grid">
+              <div class="overview-item">
+                <div class="label">Portfolio Value</div>
+                <div class="value" id="totalValue">—</div>
+              </div>
+              <div class="overview-item">
+                <div class="label">Daily Change</div>
+                <div class="value" id="dailyChange">—</div>
+              </div>
+              <div class="overview-item">
+                <div class="label">Since Start</div>
+                <div class="value" id="sinceStart">—</div>
+              </div>
+            </div>
+          </section>
 
-    <footer>
-      <p><small>Educational portfolio tracking tool. Updated daily by administrator.</small></p>
-    </footer>
+          <!-- Portfolio Growth Chart -->
+          <section class="card">
+            <h2>Portfolio Growth Over Time</h2>
+            <div class="small">Tracking daily portfolio value and performance trends</div>
+            <div class="chart-container">
+              <canvas id="publicPortfolioChart"></canvas>
+            </div>
+          </section>
+
+          <!-- Holdings Table -->
+          <section class="card holdings">
+            <h2>Current Holdings</h2>
+            <div class="small mb-2">Detailed breakdown of all investment positions</div>
+            <div style="overflow-x:auto">
+              <table id="holdingsTable">
+                <thead>
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Quantity</th>
+                    <th>Avg Price</th>
+                    <th>Market Price</th>
+                    <th>Total Value</th>
+                    <th>Gain/Loss</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Daily Logs -->
+          <section class="card logs">
+            <h2>Historical Performance Log</h2>
+            <div class="small mb-2">Daily portfolio value snapshots</div>
+            <div style="overflow-x:auto">
+              <table id="logsTable">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Total Value</th>
+                    <th>Change</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <p><small>Professional portfolio tracking platform. Data updated daily by administrator.</small></p>
+          <p><small style="margin-top:8px;display:block">© 2025 Portfolio Tracker. All rights reserved.</small></p>
+        </footer>
+      </div>
+    </div>
   </div>
   <script src="assets/js/app_public.js"></script>
 </body>

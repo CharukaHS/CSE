@@ -1,10 +1,156 @@
 {
-  "holdings": [
-    {"symbol":"ABC","qty":100,"avgPrice":50.00,"marketPrice":55.00,"notes":"Demo"},
-    {"symbol":"XYZ","qty":200,"avgPrice":30.00,"marketPrice":28.00,"notes":"Demo loss"}
-  ],
-  "logs": [
-    {"date":"2025-11-20","value":15000},
-    {"date":"2025-11-21","value":15250}
-  ]
+    "cashBalance": 4441.69,
+    "initialDeposit": 10000,
+    "holdings": [
+        {
+            "symbol": "AAIC",
+            "qty": 36,
+            "avgPrice": 79.18,
+            "marketPrice": 75.1,
+            "notes": ""
+        },
+        {
+            "symbol": "ABL",
+            "qty": 10,
+            "avgPrice": 28.63,
+            "marketPrice": 30.9,
+            "notes": ""
+        },
+        {
+            "symbol": "BIL",
+            "qty": 150,
+            "avgPrice": 7.98,
+            "marketPrice": 7,
+            "notes": ""
+        },
+        {
+            "symbol": "BPPL",
+            "qty": 10,
+            "avgPrice": 19.84,
+            "marketPrice": 20.5,
+            "notes": ""
+        },
+        {
+            "symbol": "DOCK",
+            "qty": 1,
+            "avgPrice": 149.12,
+            "marketPrice": 405.25,
+            "notes": ""
+        },
+        {
+            "symbol": "EXT",
+            "qty": 170,
+            "avgPrice": 7.03,
+            "marketPrice": 7.3,
+            "notes": ""
+        },
+        {
+            "symbol": "HAYL",
+            "qty": 1,
+            "avgPrice": 100.41,
+            "marketPrice": 194.75,
+            "notes": ""
+        },
+        {
+            "symbol": "HHL",
+            "qty": 5,
+            "avgPrice": 30.88,
+            "marketPrice": 35.6,
+            "notes": ""
+        },
+        {
+            "symbol": "JKH",
+            "qty": 11,
+            "avgPrice": 22.32,
+            "marketPrice": 22.4,
+            "notes": ""
+        },
+        {
+            "symbol": "LWL",
+            "qty": 10,
+            "avgPrice": 52.42,
+            "marketPrice": 51,
+            "notes": ""
+        },
+        {
+            "symbol": "MGT",
+            "qty": 5,
+            "avgPrice": 45.91,
+            "marketPrice": 41.6,
+            "notes": ""
+        },
+        {
+            "symbol": "NDB",
+            "qty": 1,
+            "avgPrice": 78.16,
+            "marketPrice": 148.25,
+            "notes": ""
+        },
+        {
+            "symbol": "PABC",
+            "qty": 1,
+            "avgPrice": 23.01,
+            "marketPrice": 61.9,
+            "notes": ""
+        },
+        {
+            "symbol": "PARQ",
+            "qty": 1,
+            "avgPrice": 94.07,
+            "marketPrice": 86,
+            "notes": ""
+        },
+        {
+            "symbol": "RICH",
+            "qty": 1,
+            "avgPrice": 26.59,
+            "marketPrice": 40.8,
+            "notes": ""
+        },
+        {
+            "symbol": "SAMP",
+            "qty": 1,
+            "avgPrice": 69.67,
+            "marketPrice": 147.5,
+            "notes": ""
+        },
+        {
+            "symbol": "SEYB",
+            "qty": 1,
+            "avgPrice": 50.1,
+            "marketPrice": 109,
+            "notes": ""
+        },
+        {
+            "symbol": "SINH",
+            "qty": 35,
+            "avgPrice": 9.21,
+            "marketPrice": 9.9,
+            "notes": ""
+        },
+        {
+            "symbol": "SUN",
+            "qty": 10,
+            "avgPrice": 30.68,
+            "marketPrice": 34.5,
+            "notes": ""
+        },
+        {
+            "symbol": "VONE",
+            "qty": 1,
+            "avgPrice": 52.97,
+            "marketPrice": 104.25,
+            "notes": ""
+        }
+    ],
+    "logs": [
+        {
+            "date": "2025-11-24",
+            "value": 12851.89
+        },
+        {
+            "date": "2025-11-25",
+            "value": 13081.89
+        }
+    ]
 }
